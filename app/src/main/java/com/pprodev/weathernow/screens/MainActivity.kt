@@ -1,15 +1,22 @@
 package com.pprodev.weathernow.screens
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.pprodev.weathernow.R
-import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
+
+    // ViewModel
+    private val viewModel: SharedViewModel by lazy {
+        ViewModelProvider(this)[SharedViewModel::class.java]
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Timber.d("MainActivity: onCreate()")
+        viewModel.getCurrentWeather()
+
     }
 }
