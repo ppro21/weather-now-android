@@ -27,7 +27,7 @@ class SharedViewModel : ViewModel() {
             val response: CurrentWeatherResponseModel? = repository.getCurrentWeather(cityName)
 
             withContext(Dispatchers.Main) {
-                _cityNameMutableLiveData.value = response?.name
+                _cityNameMutableLiveData.value = "${response?.name}, ${response?.sys?.country}"
 
                 _weatherIconMutableLiveData.value =
                     "https://openweathermap.org/img/wn/${response?.weather?.get(0)?.icon}@4x.png"
