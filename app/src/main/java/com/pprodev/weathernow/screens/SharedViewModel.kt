@@ -11,12 +11,15 @@ class SharedViewModel : ViewModel() {
     var job: Job? = null
     private val repository: SharedRepository = SharedRepository()
 
-    //    private val _cityName = MutableLiveData<String>()
+    // LiveData
+    private val _weatherIconMutableLiveData = MutableLiveData<String?>()
+    val weatherIconLiveData: LiveData<String?> = _weatherIconMutableLiveData
+
     private val _cityNameMutableLiveData = MutableLiveData<String?>()
     val cityNameLiveData: LiveData<String?> = _cityNameMutableLiveData
 
-    private val _weatherIconMutableLiveData = MutableLiveData<String?>()
-    val weatherIconLiveData: LiveData<String?> = _weatherIconMutableLiveData
+    private val _weatherImgNameMutableLiveData = MutableLiveData<String?>()
+    val weatherImgNameLiveData: LiveData<String?> = _weatherImgNameMutableLiveData
 
     fun getCurrentWeather(cityName: String) {
 
@@ -24,10 +27,12 @@ class SharedViewModel : ViewModel() {
             val response: CurrentWeatherResponseModel? = repository.getCurrentWeather(cityName)
 
             withContext(Dispatchers.Main) {
-                _cityNameMutableLiveData.value = response?.weather?.get(0)?.main
+                _cityNameMutableLiveData.value = "${response?.name}, ${response?.sys?.country}"
 
-                val iconCode = response?.weather?.get(0)?.icon
-                _weatherIconMutableLiveData.value ="https://openweathermap.org/img/wn/${response?.weather?.get(0)?.icon}@4x.png"
+                _weatherIconMutableLiveData.value =
+                    "https://openweathermap.org/img/wn/${response?.weather?.get(0)?.icon}@4x.png"
+
+                _weatherImgNameMutableLiveData.value = response?.weather?.get(0)?.main
             }
         }
     }
