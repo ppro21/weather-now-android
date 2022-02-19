@@ -8,5 +8,8 @@ class WeatherNowApplication: Application() {
         super.onCreate()
 
         Timber.plant(Timber.DebugTree())
+
+//        val locationServiceManager = AppLocationService(this)
+//        Timber.d("GPS Service Running: %s", locationServiceManager.isServiceRunning())
     }
 }
