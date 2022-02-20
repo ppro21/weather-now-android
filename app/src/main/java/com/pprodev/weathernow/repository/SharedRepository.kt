@@ -6,6 +6,9 @@ import retrofit2.HttpException
 import timber.log.Timber
 import java.io.IOException
 
+/**
+ * Repository provides clean API abstraction over data / resource
+ * */
 class SharedRepository {
     suspend fun getCurrentWeather(cityName: String): CurrentWeatherResponseModel? {
         val request = try {

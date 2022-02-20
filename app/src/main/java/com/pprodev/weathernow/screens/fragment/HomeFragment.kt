@@ -19,7 +19,6 @@ import com.pprodev.weathernow.databinding.FragmentHomeBinding
 import com.pprodev.weathernow.screens.SharedViewModel
 import com.pprodev.weathernow.service.AppLocationService
 import com.pprodev.weathernow.utils.PermissionUtil
-import kotlinx.android.synthetic.main.fragment_home.*
 import timber.log.Timber
 
 
@@ -48,7 +47,7 @@ class HomeFragment : Fragment() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
 
         val appLocationService = AppLocationService(this.requireActivity())
-        Timber.i("GPS Service Running: %s", appLocationService.isServiceRunning())
+        Timber.i("GPS or Network Service is ON: %s", appLocationService.isServiceRunning())
         if (appLocationService.isServiceRunning()) {
             fetchCurrentLocation()
             observeViewModel()

@@ -7,9 +7,10 @@ import com.pprodev.weathernow.model.CurrentWeatherResponseModel
 import com.pprodev.weathernow.repository.SharedRepository
 import kotlinx.coroutines.*
 
-class SharedViewModel : ViewModel() {
-    var job: Job? = null
+class SharedViewModel constructor(
     private val repository: SharedRepository = SharedRepository()
+) : ViewModel() {
+    var job: Job? = null
 
     // LiveData
     private val _weatherIconMutableLiveData = MutableLiveData<String?>()
